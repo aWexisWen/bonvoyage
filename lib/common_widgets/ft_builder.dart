@@ -14,8 +14,8 @@ class FerryTicketBuilder extends StatelessWidget {
   final Function(FerryTicket) onDelete;
   Future<String> getFerryTicketName(int id) async {
     final DatabaseServices _databaseService = DatabaseServices();
-    final FerryTicket = await _databaseService.FerryTicket(id);
-    return FerryTicket.name;
+    final FerryTicket = await _databaseService.ferryTicket(id);
+    return FerryTicket.depart_route;
   }
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class FerryTicketBuilder extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                FerryTicket.id.toString(),
+                FerryTicket.depart_route.toString(),
                 style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -69,14 +69,14 @@ class FerryTicketBuilder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    FerryTicket.name,
+                    FerryTicket.depart_route,
                     style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 4.0),
-                  Text(FerryTicket.description),
+                  Text(FerryTicket.depart_route),
                 ],
               ),
             ),

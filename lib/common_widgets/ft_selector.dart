@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ft_selector extends StatelessWidget {
   const ft_selector({
     Key? key,
-    required this.brands,
+    required this.ferry_ticket,
     required this.selectedIndex,
     required this.onChanged,
   }) : super(key: key);

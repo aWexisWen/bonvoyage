@@ -1,42 +1,48 @@
+import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/services/database_service.dart';
 import 'package:flutter/material.dart';
-import 'package:lab5shoesbrand/models/.dart';
-import 'package:lab5shoesbrand/services/database_service.dart';
+import 'package:bonvoyage/models/ferry_ticket.dart';
+import 'package:bonvoyage/services/database_service.dart';
 
 class buy_ticketFormPage extends StatefulWidget {
-  const buy_ticketFormPage({Key? key, this.buy_ticket}) : super(key: key);
-  final buy_ticket? buy_ticket;
+  const buy_ticketFormPage({Key? key, this.ferry_ticket}) : super(key: key);
+  final FerryTicket? ferry_ticket;
   @override
   _buy_ticketFormPageState createState() => _buy_ticketFormPageState();
 }
 
 class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _descController = TextEditingController();
+  final TextEditingController _depart_dateController = TextEditingController();
+  final TextEditingController _journeyController = TextEditingController();
+  final TextEditingController _depart_routeController = TextEditingController();
+  final TextEditingController _dest_routeController = TextEditingController();
+  final TextEditingController _user_idController = TextEditingController();
   final DatabaseServices _databaseService = DatabaseServices();
 
   @override
   void initState() {
     super.initState();
-    if (widget.buy_ticket != null) {
-      _nameController.text = widget.brand!.name;
-      _descController.text = widget.brand!.description;
+    if (widget.ferry_ticket != null) {
+      _depart_dateController.text = widget.ferry_ticket!.depart_date;
+      _journeyController.text = widget.ferry_ticket!.journey;
+      _depart_routeController.text = widget.ferry_ticket!.depart_route;
+      _dest_routeController.text = widget.ferry_ticket!.dest_route;
+      _user_idController.text = widget.ferry_ticket!.user_id as String;
     }
   }
 
   Future<void> _onSave() async {
-    final name = _nameController.text;
-    final description = _descController.text;
-    widget.brand == null
-        ? await _databaseService.insertBrand(
-            Brand(name: name, description: description),
+    final depart_date = _depart_dateController.text;
+    final journey = _journeyController.text;
+    final depart_route = _depart_routeController.text;
+    final dest_route = _depart_dateController.text;
+
+    widget.ferry_ticket == null
+        ? await _databaseService.insertFerryTicket(
+            FerryTicket(book_id: book_id, depart_date: depart_date, journey: journey, depart_route: depart_route, dest_route: dest_route)
           )
-        : await _databaseService.updateBrand(
-            Brand(
-              id: widget.brand!.id,
-              name: name,
-              description: description,
-            ),
+        : await _databaseService.editFerryTicket(
+            FerryTicket(depart_date: depart_date, journey: journey, depart_route: depart_route, dest_route: dest_route)
           );
     Navigator.pop(context);
   }
@@ -54,7 +60,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
-              controller: _nameController,
+              controller: _depart_routeController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter name of the brand here',
@@ -62,7 +68,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _descController,
+              controller: _depart_dateController,
               maxLines: 7,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
