@@ -78,6 +78,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
           onChanged: (location) => setState(()=>selectedLocation = location),
     )
     ),
-  );
+    //add here
+    );
   }
 }
