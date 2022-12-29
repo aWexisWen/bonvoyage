@@ -32,6 +32,8 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
   String? selectedLocation = 'Penang';
   Trip? _character = Trip.oneway;
 
+  DateTime date = DateTime(2022, 12, 24);
+
   @override
   void initState() {
     super.initState();
@@ -79,6 +81,26 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  '${date.year}/${date.month}/${date.day}',
+                  style: TextStyle(fontSize: 24),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  child: Text('Select Date'),
+                  onPressed: () async {
+                    DateTime? newDate = await showDatePicker(
+                      context: context,
+                      initialDate: date,
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime(2030),
+                    );
+
+                    if (newDate == null) return;
+
+                    setState(() => date = newDate);
+                  },
+                ),
                 DropdownButton<String>(
                   value: selectedLocation,
                   items: location
@@ -103,7 +125,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
                         _character = value;
                       });
                     },
-                  ), //fuck u fadil
+                  ),
                 ),
                 ListTile(
                   title: const Text('Return'),
