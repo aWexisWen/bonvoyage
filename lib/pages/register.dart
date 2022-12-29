@@ -2,6 +2,8 @@ import 'package:bonvoyage/pages/login.dart';
 import 'package:flutter/material.dart';
 
 import '../common_widgets/formField.dart';
+import 'package:bonvoyage/models/users.dart';
+import 'package:bonvoyage/services/database_service.dart';
 
 class Signupform extends StatefulWidget {
   const Signupform({Key? key}) : super(key: key);
@@ -16,6 +18,21 @@ class _SignupformState extends State<Signupform> {
   final conUsername = TextEditingController();
   final conPassword = TextEditingController();
   final conMobileNum = TextEditingController();
+  final DatabaseServices _databaseService = DatabaseServices();
+
+  Future<void> _onSave() async {
+    await _databaseService.registerUser(
+      User(
+          f_name: conFirstName.text,
+          l_name: conLastName.text,
+          username: conUsername.text,
+          password: conPassword.text,
+          mobilehp: conMobileNum.text),
+    );
+
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,10 +92,10 @@ class _SignupformState extends State<Signupform> {
                   ),
                   SizedBox(height: 5.0),
                   getTextFormField(
-                      controller: conMobileNum,
-                      hintname: 'Mobile Number',
-                      icon: Icons.phone,
-                      inputType: TextInputType.number),
+                    controller: conMobileNum,
+                    hintname: 'Mobile Number',
+                    icon: Icons.phone,
+                  ),
                   SizedBox(height: 5.0),
 
                   Container(
@@ -89,7 +106,7 @@ class _SignupformState extends State<Signupform> {
                         'Signup',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: _onSave,
                     ),
                     decoration: BoxDecoration(
                         color: Colors.blue,
