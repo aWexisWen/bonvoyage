@@ -18,6 +18,14 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
   final TextEditingController _dest_routeController = TextEditingController();
   final TextEditingController _user_idController = TextEditingController();
   final DatabaseServices _databaseService = DatabaseServices();
+   List<String> location = [
+    'Penang',
+    'Langkawi',
+    'Singapore',
+    'Batam',
+    'Koh Lipe'
+  ];
+  String? selectedLocation = 'Penang';
 
   @override
   void initState() {
@@ -38,12 +46,16 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
     final dest_route = _depart_dateController.text;
 
     widget.ferry_ticket == null
-        ? await _databaseService.insertFerryTicket(
-            FerryTicket(depart_date: depart_date, journey: journey, depart_route: depart_route, dest_route: dest_route)
-          )
-        : await _databaseService.editFerryTicket(
-            FerryTicket(depart_date: depart_date, journey: journey, depart_route: depart_route, dest_route: dest_route)
-          );
+        ? await _databaseService.insertFerryTicket(FerryTicket(
+            depart_date: depart_date,
+            journey: journey,
+            depart_route: depart_route,
+            dest_route: dest_route))
+        : await _databaseService.editFerryTicket(FerryTicket(
+            depart_date: depart_date,
+            journey: journey,
+            depart_route: depart_route,
+            dest_route: dest_route));
     Navigator.pop(context);
   }
 
@@ -51,46 +63,21 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add a new brand'),
+        title: const Text('Ferry Ticket'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _depart_routeController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter name of the brand here',
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: _depart_dateController,
-              maxLines: 7,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter description about the brand here',
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            SizedBox(
-              height: 45.0,
-              child: ElevatedButton(
-                onPressed: _onSave,
-                child: const Text(
-                  'Save the Brand',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+      body: Center(
+        child: DropdownButton<String>(
+          value: selectedLocation,
+          items: location
+          .map((location) => DropdownMenuItem<String>(
+            value: location,
+            child: Text(location, style: TextStyle(fontSize: 24),),
+          ))
+      .toList(),
+          onChanged: (location) => setState(()=>selectedLocation = location),
+    )
+    ),
+  );
   }
 }
