@@ -11,6 +11,8 @@ class buy_ticketFormPage extends StatefulWidget {
   _buy_ticketFormPageState createState() => _buy_ticketFormPageState();
 }
 
+enum Trip { oneway, returning }
+
 class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
   final TextEditingController _depart_dateController = TextEditingController();
   final TextEditingController _journeyController = TextEditingController();
@@ -18,7 +20,9 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
   final TextEditingController _dest_routeController = TextEditingController();
   final TextEditingController _user_idController = TextEditingController();
   final DatabaseServices _databaseService = DatabaseServices();
-   List<String> location = [
+  final _formKey = GlobalKey<FormState>();
+
+  List<String> location = [
     'Penang',
     'Langkawi',
     'Singapore',
@@ -26,6 +30,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
     'Koh Lipe'
   ];
   String? selectedLocation = 'Penang';
+  Trip? _character = Trip.oneway;
 
   @override
   void initState() {
@@ -66,19 +71,57 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
         title: const Text('Ferry Ticket'),
         centerTitle: true,
       ),
-      body: Center(
-        child: DropdownButton<String>(
-          value: selectedLocation,
-          items: location
-          .map((location) => DropdownMenuItem<String>(
-            value: location,
-            child: Text(location, style: TextStyle(fontSize: 24),),
-          ))
-      .toList(),
-          onChanged: (location) => setState(()=>selectedLocation = location),
-    )
-    ),
-    //add here
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DropdownButton<String>(
+                  value: selectedLocation,
+                  items: location
+                      .map((location) => DropdownMenuItem<String>(
+                            value: location,
+                            child: Text(
+                              location,
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (location) =>
+                      setState(() => selectedLocation = location),
+                ),
+                ListTile(
+                  title: const Text('One way'),
+                  leading: Radio<Trip>(
+                    value: Trip.oneway,
+                    groupValue: _character,
+                    onChanged: (Trip? value) {
+                      setState(() {
+                        _character = value;
+                      });
+                    },
+                  ), //fuck u fadil
+                ),
+                ListTile(
+                  title: const Text('Return'),
+                  leading: Radio<Trip>(
+                    value: Trip.returning,
+                    groupValue: _character,
+                    onChanged: (Trip? value) {
+                      setState(() {
+                        _character = value;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
