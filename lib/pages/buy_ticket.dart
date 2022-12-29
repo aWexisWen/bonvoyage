@@ -51,14 +51,16 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
     final journey = _journeyController.text;
     final depart_route = _depart_routeController.text;
     final dest_route = _depart_dateController.text;
-
+    
     widget.ferry_ticket == null
-        ? await _databaseService.insertFerryTicket(FerryTicket(
+        ? await _databaseService.insertFerryTicket(
+          FerryTicket(
             depart_date: depart_date,
             journey: journey,
             depart_route: depart_route,
             dest_route: dest_route))
-        : await _databaseService.editFerryTicket(FerryTicket(
+        : await _databaseService.editFerryTicket(
+          FerryTicket(
             depart_date: depart_date,
             journey: journey,
             depart_route: depart_route,
@@ -137,6 +139,19 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
                         _character = value;
                       });
                     },
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                SizedBox(
+                  height: 45.0,
+                  child: ElevatedButton(
+                    onPressed: _onSave,
+                    child: const Text(
+                      'Purchase Ticket',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
                   ),
                 ),
               ],
