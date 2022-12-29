@@ -73,7 +73,7 @@ Future<FerryTicket> ferryTicket(int id) async {
     await db.delete(
       'ferryticket',
       where: 'id = ?',
-      whereArgs: [id],
+      whereArgs: [ferryTicket.book_id],
     );
   }
 

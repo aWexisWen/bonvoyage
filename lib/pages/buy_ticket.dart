@@ -39,7 +39,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
 
     widget.ferry_ticket == null
         ? await _databaseService.insertFerryTicket(
-            FerryTicket(book_id: book_id, depart_date: depart_date, journey: journey, depart_route: depart_route, dest_route: dest_route)
+            FerryTicket(depart_date: depart_date, journey: journey, depart_route: depart_route, dest_route: dest_route)
           )
         : await _databaseService.editFerryTicket(
             FerryTicket(depart_date: depart_date, journey: journey, depart_route: depart_route, dest_route: dest_route)
