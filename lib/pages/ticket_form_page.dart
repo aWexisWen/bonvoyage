@@ -88,6 +88,7 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                 ),
                 const SizedBox(height: 16.0),
                 DropdownButton<String>(
+                  hint: Text('depart route'),
                   value: selectedLocation,
                   items: location
                       .map((location) => DropdownMenuItem<String>(
