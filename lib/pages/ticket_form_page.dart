@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/services/database_service.dart';
 import 'package:bonvoyage/models/users.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 
 class FerryTicketFormPage extends StatefulWidget {
   const FerryTicketFormPage({Key? key, this.ferry_ticket, this.user})
@@ -82,11 +83,40 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                TextField(
-                  controller: _depart_dateController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter name of the FerryTicket here',
+                /*Text(
+                  '${date.year}/${date.month}/${date.day}',
+                  style: TextStyle(fontSize: 24),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  child: Text('Select Date'),
+                  onPressed: () async {
+                    DateTime? newDate = await showDatePicker(
+                      context: context,
+                      initialDate: date,
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime(2030),
+                    );
+
+                    if (newDate == null) return;
+
+                    setState(() => date = newDate);
+                  },
+                ),*/
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DateTimePicker(
+                    type: DateTimePickerType.dateTimeSeparate,
+                    dateMask: 'd MMM, yyyy',
+                    controller: _depart_dateController,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2100),
+                    icon: const Icon(Icons.event),
+                    dateLabelText: "Check In Date",
+                    timeLabelText: "Time",
+                    onChanged: (val) => print(val),
+                    validator: (val) => val!.isEmpty ? "Required" : null,
+                    onSaved: (val) => print(val),
                   ),
                 ),
                 const SizedBox(height: 16.0),
