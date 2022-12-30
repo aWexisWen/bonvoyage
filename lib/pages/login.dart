@@ -1,3 +1,4 @@
+import 'package:bonvoyage/pages/buy_ticket.dart';
 import 'package:bonvoyage/pages/register.dart';
 import 'package:bonvoyage/common_widgets/formField.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,12 @@ class _LoginFormState extends State<LoginForm> {
                         'Login',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => buy_ticketFormPage()));
+                      },
                     ),
                     decoration: BoxDecoration(
                         color: Colors.blue,
