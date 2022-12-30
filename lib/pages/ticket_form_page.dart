@@ -1,5 +1,3 @@
-import 'package:bonvoyage/models/ferry_ticket.dart';
-import 'package:bonvoyage/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/services/database_service.dart';
@@ -11,12 +9,12 @@ class buy_ticketFormPage extends StatefulWidget {
   final FerryTicket? ferry_ticket;
   final User? user;
   @override
-  _buy_ticketFormPageState createState() => _buy_ticketFormPageState();
+  _FerryTicketFormPageState createState() => _FerryTicketFormPageState();
 }
 
 enum Trip { oneway, returning }
 
-class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
+class _FerryTicketFormPageState extends State<buy_ticketFormPage> {
   final TextEditingController _depart_dateController = TextEditingController();
   final TextEditingController _journeyController = TextEditingController();
   final TextEditingController _depart_routeController = TextEditingController();
@@ -73,37 +71,25 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ferry Ticket'),
+        title: const Text('FerryTicket'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 30),
+            padding: const EdgeInsets.all(12.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  '${date.year}/${date.month}/${date.day}',
-                  style: TextStyle(fontSize: 24),
+                TextField(
+                  controller: _depart_dateController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter name of the FerryTicket here',
+                  ),
                 ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  child: Text('Select Date'),
-                  onPressed: () async {
-                    DateTime? newDate = await showDatePicker(
-                      context: context,
-                      initialDate: date,
-                      firstDate: DateTime(2020),
-                      lastDate: DateTime(2030),
-                    );
-
-                    if (newDate == null) return;
-
-                    setState(() => date = newDate);
-                  },
-                ),
+                const SizedBox(height: 16.0),
                 DropdownButton<String>(
                   value: selectedLocation,
                   items: location
@@ -118,6 +104,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
                   onChanged: (location) =>
                       setState(() => selectedLocation = location),
                 ),
+                const SizedBox(height: 16.0),
                 ListTile(
                   title: const Text('One way'),
                   leading: Radio<Trip>(
@@ -148,7 +135,7 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
                   child: ElevatedButton(
                     onPressed: _onSave,
                     child: const Text(
-                      'Purchase Ticket',
+                      'Purchase Ferry Ticket',
                       style: TextStyle(
                         fontSize: 16.0,
                       ),
