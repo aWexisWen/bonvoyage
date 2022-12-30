@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/services/database_service.dart';
+import 'package:bonvoyage/models/users.dart';
 
 class FerryTicketFormPage extends StatefulWidget {
-  const FerryTicketFormPage({Key? key, this.ferry_ticket}) : super(key: key);
+  const FerryTicketFormPage({Key? key, this.ferry_ticket, this.user})
+      : super(key: key);
   final FerryTicket? ferry_ticket;
+  final User? user;
   @override
   _FerryTicketFormPageState createState() => _FerryTicketFormPageState();
 }

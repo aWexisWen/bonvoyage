@@ -2,6 +2,8 @@ import 'package:bonvoyage/pages/ticket_form_page.dart';
 import 'package:bonvoyage/pages/register.dart';
 import 'package:bonvoyage/common_widgets/formField.dart';
 import 'package:flutter/material.dart';
+import 'package:bonvoyage/models/users.dart';
+import 'package:bonvoyage/services/database_service.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -9,8 +11,11 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
   final conUsername = TextEditingController();
   final conPassword = TextEditingController();
+  final DatabaseServices _databaseService = DatabaseServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +48,12 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   getTextFormField(
                       controller: conUsername,
-                      hintname: 'Username123',
+                      hintname: 'Username',
                       icon: Icons.person),
                   SizedBox(height: 5.0),
                   getTextFormField(
                     controller: conPassword,
-                    hintname: 'Password123',
+                    hintname: 'Password',
                     icon: Icons.lock,
                     isObscureText: true,
                   ),
@@ -61,10 +66,10 @@ class _LoginFormState extends State<LoginForm> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => FerryTicketFormPage()));
+                        User user = User(
+                            username: conUsername.text,
+                            password: conPassword.text);
+                        _databaseService.userLogin(user, context);
                       },
                     ),
                     decoration: BoxDecoration(
