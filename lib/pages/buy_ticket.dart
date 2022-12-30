@@ -3,10 +3,13 @@ import 'package:bonvoyage/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/services/database_service.dart';
+import 'package:bonvoyage/models/users.dart';
 
 class buy_ticketFormPage extends StatefulWidget {
-  const buy_ticketFormPage({Key? key, this.ferry_ticket}) : super(key: key);
+  const buy_ticketFormPage({Key? key, this.ferry_ticket, this.user})
+      : super(key: key);
   final FerryTicket? ferry_ticket;
+  final User? user;
   @override
   _buy_ticketFormPageState createState() => _buy_ticketFormPageState();
 }
@@ -51,16 +54,14 @@ class _buy_ticketFormPageState extends State<buy_ticketFormPage> {
     final journey = _journeyController.text;
     final depart_route = _depart_routeController.text;
     final dest_route = _depart_dateController.text;
-    
+
     widget.ferry_ticket == null
-        ? await _databaseService.insertFerryTicket(
-          FerryTicket(
+        ? await _databaseService.insertFerryTicket(FerryTicket(
             depart_date: depart_date,
             journey: journey,
             depart_route: depart_route,
             dest_route: dest_route))
-        : await _databaseService.editFerryTicket(
-          FerryTicket(
+        : await _databaseService.editFerryTicket(FerryTicket(
             depart_date: depart_date,
             journey: journey,
             depart_route: depart_route,

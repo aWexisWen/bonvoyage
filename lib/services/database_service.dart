@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bonvoyage/pages/buy_ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/models/users.dart';
@@ -83,14 +84,32 @@ class DatabaseServices {
     );
   }
 
-  Future<User?> userLogin(String username, String password) async {
+  Future<User?> userLogin(User user, BuildContext context) async {
     final db = await _databaseService.database;
-    var res = await db.rawQuery(
-        "SELECT * FROM user WHERE username = '$username' and password = '$password'");
-    if (res.isNotEmpty) {
-      return User.fromMap(res.first);
+    final List<Map<String, dynamic>> result = await db.query(
+      'user',
+      where: 'username = ? and password = ?',
+      whereArgs: [user.username, user.password],
+    );
+
+    if (result.isEmpty) {
+      print(user);
+      // ignore: use_build_context
+      // _synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Wrong password or username. Log in unsuccessful.')),
+      );
     } else {
-      return null;
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login Successful. Hello, ${user.username}.')),
+      );
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => buy_ticketFormPage(user: user)),
+      );
     }
   }
 }

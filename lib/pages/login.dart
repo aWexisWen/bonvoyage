@@ -1,6 +1,8 @@
 import 'package:bonvoyage/pages/register.dart';
 import 'package:bonvoyage/common_widgets/formField.dart';
 import 'package:flutter/material.dart';
+import 'package:bonvoyage/models/users.dart';
+import 'package:bonvoyage/services/database_service.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -8,8 +10,11 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
   final conUsername = TextEditingController();
   final conPassword = TextEditingController();
+  final DatabaseServices _databaseService = DatabaseServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +64,12 @@ class _LoginFormState extends State<LoginForm> {
                         'Login',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        User user = User(
+                            username: conUsername.text,
+                            password: conPassword.text);
+                        _databaseService.userLogin(user, context);
+                      },
                     ),
                     decoration: BoxDecoration(
                         color: Colors.blue,
