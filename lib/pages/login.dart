@@ -48,12 +48,12 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   getTextFormField(
                       controller: conUsername,
-                      hintname: 'Username123',
+                      hintname: 'Username',
                       icon: Icons.person),
                   SizedBox(height: 5.0),
                   getTextFormField(
                     controller: conPassword,
-                    hintname: 'Password123',
+                    hintname: 'Password',
                     icon: Icons.lock,
                     isObscureText: true,
                   ),

@@ -1,11 +1,12 @@
 import 'dart:io';
-import 'package:bonvoyage/pages/buy_ticket.dart';
+
 import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/models/users.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:bonvoyage/pages/ticket_form_page.dart';
 
 class DatabaseServices {
   static final DatabaseServices _databaseService = DatabaseServices._internal();
@@ -103,12 +104,13 @@ class DatabaseServices {
     } else {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login Successful. Hello, ${user.username}.')),
+        SnackBar(content: Text('Welcome, ${user.username}!')),
       );
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => buy_ticketFormPage(user: user)),
+        MaterialPageRoute(
+            builder: (context) => FerryTicketFormPage(user: user)),
       );
     }
   }

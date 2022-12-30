@@ -3,8 +3,8 @@ import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/services/database_service.dart';
 import 'package:bonvoyage/models/users.dart';
 
-class buy_ticketFormPage extends StatefulWidget {
-  const buy_ticketFormPage({Key? key, this.ferry_ticket, this.user})
+class FerryTicketFormPage extends StatefulWidget {
+  const FerryTicketFormPage({Key? key, this.ferry_ticket, this.user})
       : super(key: key);
   final FerryTicket? ferry_ticket;
   final User? user;
@@ -14,7 +14,7 @@ class buy_ticketFormPage extends StatefulWidget {
 
 enum Trip { oneway, returning }
 
-class _FerryTicketFormPageState extends State<buy_ticketFormPage> {
+class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
   final TextEditingController _depart_dateController = TextEditingController();
   final TextEditingController _journeyController = TextEditingController();
   final TextEditingController _depart_routeController = TextEditingController();
@@ -91,6 +91,7 @@ class _FerryTicketFormPageState extends State<buy_ticketFormPage> {
                 ),
                 const SizedBox(height: 16.0),
                 DropdownButton<String>(
+                  hint: Text('depart route'),
                   value: selectedLocation,
                   items: location
                       .map((location) => DropdownMenuItem<String>(
