@@ -24,14 +24,23 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
   final DatabaseServices _databaseService = DatabaseServices();
   final _formKey = GlobalKey<FormState>();
 
-  List<String> location = [
+  List<String> depart = [
     'Penang',
     'Langkawi',
     'Singapore',
     'Batam',
     'Koh Lipe'
   ];
-  String? selectedLocation = 'Penang';
+  String? selectedDepart = 'Penang';
+
+  List<String> destination = [
+    'Penang',
+    'Langkawi',
+    'Singapore',
+    'Batam',
+    'Koh Lipe'
+  ];
+  String? selectedDestination = 'Penang';
   Trip? _character = Trip.oneway;
 
   DateTime date = DateTime(2022, 12, 24);
@@ -103,37 +112,71 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                     setState(() => date = newDate);
                   },
                 ),*/
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: DateTimePicker(
-                    type: DateTimePickerType.dateTimeSeparate,
-                    dateMask: 'd MMM, yyyy',
-                    controller: _depart_dateController,
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(2100),
-                    icon: const Icon(Icons.event),
-                    dateLabelText: "Check In Date",
-                    timeLabelText: "Time",
-                    onChanged: (val) => print(val),
-                    validator: (val) => val!.isEmpty ? "Required" : null,
-                    onSaved: (val) => print(val),
+                /*return DropdownButtonFormField(
+      items: location.map((String category) {
+        return new DropdownMenuItem(
+            value: category,
+            child: Row(
+              children: <Widget>[
+                //Icon(Icons.co_present_rounded),
+                Text(category),
+              ],
+            ));
+      }).toList(),
+      onChanged: (newValue) {
+        // do other stuff with _category
+        setState(() => selectedLocation = newValue!);
+      },
+      value: selectedLocation,
+      decoration: InputDecoration(
+        labelText: 'Select depart route',
+        hintText: 'Select depart route',
+        border: OutlineInputBorder(),
+        icon: Icon(Icons.co_present_rounded),
+      ),
+    ),*/
+                //depart dropdown
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    labelText: 'Depart route',
+                    hintText: 'Depart route',
                   ),
-                ),
-                const SizedBox(height: 16.0),
-                DropdownButton<String>(
-                  hint: Text('depart route'),
-                  value: selectedLocation,
-                  items: location
+                  value: selectedDepart,
+                  items: depart
                       .map((location) => DropdownMenuItem<String>(
                             value: location,
                             child: Text(
                               location,
-                              style: TextStyle(fontSize: 24),
+                              style: TextStyle(fontSize: 12),
                             ),
                           ))
                       .toList(),
                   onChanged: (location) =>
-                      setState(() => selectedLocation = location),
+                      setState(() => selectedDepart = location),
+                ),
+                //destination dropdown
+                const SizedBox(height: 16.0),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    labelText: 'Destination route',
+                    hintText: 'Destination route',
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                            width: 3, color: Colors.lightBlue)),
+                  ),
+                  value: selectedDestination,
+                  items: destination
+                      .map((location) => DropdownMenuItem<String>(
+                            value: location,
+                            child: Text(
+                              location,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (location) =>
+                      setState(() => selectedDestination = location),
                 ),
                 const SizedBox(height: 16.0),
                 ListTile(
@@ -160,6 +203,23 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                     },
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DateTimePicker(
+                    type: DateTimePickerType.dateTimeSeparate,
+                    dateMask: 'd MMM, yyyy',
+                    controller: _depart_dateController,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2100),
+                    icon: const Icon(Icons.event),
+                    dateLabelText: "Check In Date",
+                    timeLabelText: "Time",
+                    onChanged: (val) => print(val),
+                    validator: (val) => val!.isEmpty ? "Required" : null,
+                    onSaved: (val) => print(val),
+                  ),
+                ),
+                const SizedBox(height: 16.0),
                 const SizedBox(height: 16.0),
                 SizedBox(
                   height: 45.0,
