@@ -179,6 +179,7 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                       setState(() => selectedDestination = location),
                 ),
                 const SizedBox(height: 16.0),
+                Text('Journey'),
                 ListTile(
                   title: const Text('One way'),
                   leading: Radio<Trip>(
