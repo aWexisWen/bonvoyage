@@ -126,7 +126,7 @@ class _SignupformState extends State<Signupform> {
                             }
                           }),
                       decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Colors.pink,
                           borderRadius: BorderRadius.circular(30.0)),
                     ),
                     Container(
@@ -135,7 +135,7 @@ class _SignupformState extends State<Signupform> {
                         children: [
                           Text('Already have an account?'),
                           TextButton(
-                            style: TextButton.styleFrom(primary: Colors.blue),
+                            style: TextButton.styleFrom(primary: Colors.pink),
                             child: Text('Sign In'),
                             onPressed: () {
                               Navigator.pushAndRemoveUntil(

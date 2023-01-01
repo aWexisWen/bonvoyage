@@ -92,54 +92,14 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                /*Text(
-                  '${date.year}/${date.month}/${date.day}',
-                  style: TextStyle(fontSize: 24),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  child: Text('Select Date'),
-                  onPressed: () async {
-                    DateTime? newDate = await showDatePicker(
-                      context: context,
-                      initialDate: date,
-                      firstDate: DateTime(2020),
-                      lastDate: DateTime(2030),
-                    );
-
-                    if (newDate == null) return;
-
-                    setState(() => date = newDate);
-                  },
-                ),*/
-                /*return DropdownButtonFormField(
-      items: location.map((String category) {
-        return new DropdownMenuItem(
-            value: category,
-            child: Row(
-              children: <Widget>[
-                //Icon(Icons.co_present_rounded),
-                Text(category),
-              ],
-            ));
-      }).toList(),
-      onChanged: (newValue) {
-        // do other stuff with _category
-        setState(() => selectedLocation = newValue!);
-      },
-      value: selectedLocation,
-      decoration: InputDecoration(
-        labelText: 'Select depart route',
-        hintText: 'Select depart route',
-        border: OutlineInputBorder(),
-        icon: Icon(Icons.co_present_rounded),
-      ),
-    ),*/
-                //depart dropdown
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     labelText: 'Depart route',
                     hintText: 'Depart route',
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                            width: 3, color: Colors.pink)),
                   ),
                   value: selectedDepart,
                   items: depart
@@ -163,7 +123,7 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: const BorderSide(
-                            width: 3, color: Colors.lightBlue)),
+                            width: 3, color: Colors.pink)),
                   ),
                   value: selectedDestination,
                   items: destination
@@ -179,6 +139,7 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                       setState(() => selectedDestination = location),
                 ),
                 const SizedBox(height: 16.0),
+                Text('Journey'),
                 ListTile(
                   title: const Text('One way'),
                   leading: Radio<Trip>(
