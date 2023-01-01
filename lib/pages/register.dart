@@ -119,11 +119,7 @@ class _SignupformState extends State<Signupform> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LoginForm(),
-                                  ));
+                              _onSave();
                               //SaveData
                             } else {
                               print("Validation Error");
