@@ -5,15 +5,9 @@ class getTextFormField extends StatelessWidget {
   String hintname;
   IconData icon;
   bool isObscureText;
-   final FormFieldValidator<String>? validator;
+  final FormFieldValidator<String>? validator;
   TextInputType inputType;
 
-  String? validate(String value) {
-    if (value.isEmpty) {
-      return 'Please enter a value';
-    }
-    return null;
-  }
 
   getTextFormField({
     required this.controller,
@@ -33,7 +27,12 @@ class getTextFormField extends StatelessWidget {
         controller: controller,
         obscureText: isObscureText,
         keyboardType: inputType,
-        validator: validator,    
+        validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter $hintname';
+              }
+              return null;
+            },    
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
