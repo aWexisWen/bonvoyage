@@ -75,7 +75,7 @@ class _LoginFormState extends State<LoginForm> {
                         },
                       ),
                       decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Colors.pink,
                           borderRadius: BorderRadius.circular(30.0)),
                     ),
                     Container(
@@ -84,7 +84,7 @@ class _LoginFormState extends State<LoginForm> {
                         children: [
                           Text('Does not have an account?'),
                           TextButton(
-                            style: TextButton.styleFrom(primary: Colors.blue),
+                            style: TextButton.styleFrom(primary: Colors.pink),
                             child: Text('Signup'),
                             onPressed: () {
                               Navigator.push(
