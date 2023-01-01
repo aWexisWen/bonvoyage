@@ -5,14 +5,24 @@ class getTextFormField extends StatelessWidget {
   String hintname;
   IconData icon;
   bool isObscureText;
+   final FormFieldValidator<String>? validator;
   TextInputType inputType;
 
-  getTextFormField(
-      {required this.controller,
-      required this.hintname,
-      required this.icon,
-      this.isObscureText = false,
-      this.inputType = TextInputType.text});
+  String? validate(String value) {
+    if (value.isEmpty) {
+      return 'Please enter a value';
+    }
+    return null;
+  }
+
+  getTextFormField({
+    required this.controller,
+    required this.hintname,
+    required this.icon,
+    this.isObscureText = false,
+    this.validator,
+    this.inputType = TextInputType.text,
+  });
 
   // This widget is the root of your application.
   @override
@@ -23,6 +33,7 @@ class getTextFormField extends StatelessWidget {
         controller: controller,
         obscureText: isObscureText,
         keyboardType: inputType,
+        validator: validator,    
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30.0)),

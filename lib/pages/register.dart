@@ -68,10 +68,17 @@ class _SignupformState extends State<Signupform> {
                       width: 500.0,
                     ),
                     getTextFormField(
-                        controller: conFirstName,
-                        hintname: 'First Name',
-                        inputType: TextInputType.name,
-                        icon: Icons.person_outline_rounded),
+                      controller: conFirstName,
+                      hintname: 'First Name',
+                      inputType: TextInputType.name,
+                      icon: Icons.person_outline_rounded,
+                      validator: (String? val) {
+                        if (val == null) {
+                          return "Value cannot be empty";
+                        }
+                        return null;
+                      },
+                    ),
                     SizedBox(height: 5.0),
                     getTextFormField(
                       controller: conLastName,
@@ -106,12 +113,22 @@ class _SignupformState extends State<Signupform> {
                       margin: EdgeInsets.all(30.0),
                       width: double.infinity,
                       child: TextButton(
-                        child: Text(
-                          'Signup',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: _onSave,
-                      ),
+                          child: const Text(
+                            'Signup',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginForm(),
+                                  ));
+                              //SaveData
+                            } else {
+                              print("Validation Error");
+                            }
+                          }),
                       decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(30.0)),
