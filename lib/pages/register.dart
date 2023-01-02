@@ -1,6 +1,7 @@
 import 'package:bonvoyage/pages/login.dart';
 import 'package:flutter/material.dart';
 
+import '../common_widgets/buttons.dart';
 import '../common_widgets/formField.dart';
 import 'package:bonvoyage/models/users.dart';
 import 'package:bonvoyage/services/database_service.dart';
@@ -39,7 +40,7 @@ class _SignupformState extends State<Signupform> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login with Signup'),
+        title: Text('Create your account'),
       ),
       body: Form(
         key: _formKey,
@@ -112,11 +113,18 @@ class _SignupformState extends State<Signupform> {
                     Container(
                       margin: EdgeInsets.all(30.0),
                       width: double.infinity,
-                      child: TextButton(
-                          child: const Text(
-                            'Signup',
-                            style: TextStyle(color: Colors.white),
+                      child: ButtonGradient(
+                          label: 'Sign Up',
+                          textStyle: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
                           ),
+                          borderRadius: 50,
+                          gradientColor: const [
+                            Color.fromARGB(255, 251, 64, 217),
+                            Color.fromARGB(255, 243, 64, 64),
+                          ],
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _onSave();
@@ -125,6 +133,19 @@ class _SignupformState extends State<Signupform> {
                               print("Validation Error");
                             }
                           }),
+                      // child: TextButton(
+                      //     child: const Text(
+                      //       'Signup',
+                      //       style: TextStyle(color: Colors.white),
+                      //     ),
+                      //     onPressed: () {
+                      //       if (_formKey.currentState!.validate()) {
+                      //         _onSave();
+                      //         //SaveData
+                      //       } else {
+                      //         print("Validation Error");
+                      //       }
+                      //     }),
                       decoration: BoxDecoration(
                           color: Colors.pink,
                           borderRadius: BorderRadius.circular(30.0)),
