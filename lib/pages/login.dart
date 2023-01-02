@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/users.dart';
 import 'package:bonvoyage/services/database_service.dart';
 
+import '../common_widgets/buttons.dart';
+
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -60,11 +62,18 @@ class _LoginFormState extends State<LoginForm> {
                   Container(
                     margin: EdgeInsets.all(30.0),
                     width: double.infinity,
-                    child: TextButton(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white),
+                    child: ButtonGradient(
+                      label: 'Login',
+                      textStyle: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
+                      borderRadius: 50,
+                      gradientColor: const [
+                        Color.fromARGB(255, 251, 64, 217),
+                        Color.fromARGB(255, 243, 64, 64),
+                      ],
                       onPressed: () {
                         User user = User(
                             username: conUsername.text,
@@ -72,6 +81,18 @@ class _LoginFormState extends State<LoginForm> {
                         _databaseService.userLogin(user, context);
                       },
                     ),
+                    // child: TextButton(
+                    //   child: Text(
+                    //     'Login',
+                    //     style: TextStyle(color: Colors.white),
+                    //   ),
+                    //   onPressed: () {
+                    //     User user = User(
+                    //         username: conUsername.text,
+                    //         password: conPassword.text);
+                    //     _databaseService.userLogin(user, context);
+                    //   },
+                    // ),
                     decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(30.0)),
