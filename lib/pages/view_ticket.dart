@@ -28,15 +28,15 @@ class _ViewTicketPageState extends State<ViewTicketPage> {
   //   return await _databaseService.registerUser();
   // }
 
-  Future<void> _onFerryTicketDelete(FerryTicket FerryTicket) async {
-    await _databaseService.deleteFerryTicket(FerryTicket);
+  Future<void> _onFerryTicketDelete(FerryTicket ferryTicket) async {
+    await _databaseService.deleteFerryTicket(ferryTicket);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 1,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('FerryTicket Database'),
@@ -47,10 +47,10 @@ class _ViewTicketPageState extends State<ViewTicketPage> {
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Text('FerryTickets'),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Text('Users'),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(vertical: 16.0),
+              //   child: Text('Users'),
+              // ),
             ],
           ),
         ),
@@ -94,21 +94,21 @@ class _ViewTicketPageState extends State<ViewTicketPage> {
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const SizedBox(height: 12.0),
-            FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .push(
-                      MaterialPageRoute(
-                        builder: (context) => const FerryTicketFormPage(),
-                        fullscreenDialog: true,
-                      ),
-                    )
-                    .then((_) => setState(() {}));
-              },
-              heroTag: 'addBrand',
-              child: const FaIcon(FontAwesomeIcons.plus),
-            ),
+            // const SizedBox(height: 12.0),
+            // FloatingActionButton(
+            //   onPressed: () {
+            //     Navigator.of(context)
+            //         .push(
+            //           MaterialPageRoute(
+            //             builder: (context) => const FerryTicketFormPage(),
+            //             fullscreenDialog: true,
+            //           ),
+            //         )
+            //         .then((_) => setState(() {}));
+            //   },
+            //   heroTag: 'addBrand',
+            //   child: const FaIcon(FontAwesomeIcons.plus),
+            // ),
             const SizedBox(height: 12.0),
             FloatingActionButton(
               onPressed: () {

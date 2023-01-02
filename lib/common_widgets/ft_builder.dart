@@ -10,13 +10,14 @@ class FerryTicketBuilder extends StatelessWidget {
     required this.onDelete,
   }) : super(key: key);
   final Future<List<FerryTicket>> future;
-    final Function(FerryTicket) onEdit;
+  final Function(FerryTicket) onEdit;
   final Function(FerryTicket) onDelete;
   Future<String> getFerryTicketName(int id) async {
     final DatabaseServices _databaseService = DatabaseServices();
     final FerryTicket = await _databaseService.ferryTicket(id);
     return FerryTicket.depart_route;
   }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<FerryTicket>>(
@@ -32,8 +33,8 @@ class FerryTicketBuilder extends StatelessWidget {
           child: ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              final ferry_ticket = snapshot.data![index];
-              return _buildFerryTicketCard(ferry_ticket, context);
+              final ferryTicket = snapshot.data![index];
+              return _buildFerryTicketCard(ferryTicket, context);
             },
           ),
         );
@@ -41,7 +42,7 @@ class FerryTicketBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildFerryTicketCard(FerryTicket FerryTicket, BuildContext context) {
+  Widget _buildFerryTicketCard(FerryTicket ferryTicket, BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -56,7 +57,7 @@ class FerryTicketBuilder extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                FerryTicket.book_id.toString(),
+                ferryTicket.book_id.toString(),
                 style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -69,20 +70,20 @@ class FerryTicketBuilder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    FerryTicket.depart_route,
+                    ferryTicket.depart_route,
                     style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 4.0),
-                  Text(FerryTicket.depart_route),
+                  Text(ferryTicket.depart_route),
                 ],
               ),
             ),
             const SizedBox(width: 20.0),
             GestureDetector(
-              onTap: () => onEdit(FerryTicket),
+              onTap: () => onEdit(ferryTicket),
               child: Container(
                 height: 40.0,
                 width: 40.0,
@@ -96,7 +97,7 @@ class FerryTicketBuilder extends StatelessWidget {
             ),
             const SizedBox(width: 20.0),
             GestureDetector(
-              onTap: () => onDelete(FerryTicket),
+              onTap: () => onDelete(ferryTicket),
               child: Container(
                 height: 40.0,
                 width: 40.0,
