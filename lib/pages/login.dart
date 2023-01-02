@@ -22,7 +22,21 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login with Signup'),
+        elevation: 0,
+        backgroundColor: Colors.pink,
+        title: Text('BON VOYAGE', style: TextStyle(fontFamily: 'Righteous')),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: <Color>[
+                  Color.fromARGB(255, 251, 64, 217),
+                  Color.fromARGB(255, 243, 64, 64),
+                ]),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -103,8 +117,8 @@ class _LoginFormState extends State<LoginForm> {
                       children: [
                         Text('Does not have an account?'),
                         TextButton(
-                          style: TextButton.styleFrom(primary: Colors.blue),
-                          child: Text('Signup'),
+                          style: TextButton.styleFrom(primary: Colors.pink),
+                          child: Text('Sign Up'),
                           onPressed: () {
                             Navigator.push(
                                 context,

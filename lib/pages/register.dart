@@ -41,6 +41,17 @@ class _SignupformState extends State<Signupform> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create your account'),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: <Color>[
+                  Color.fromARGB(255, 251, 64, 217),
+                  Color.fromARGB(255, 243, 64, 64),
+                ]),
+          ),
+        ),
       ),
       body: Form(
         key: _formKey,
