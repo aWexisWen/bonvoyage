@@ -20,13 +20,13 @@ class ViewTicketPage extends StatefulWidget {
 
 class _ViewTicketPageState extends State<ViewTicketPage> {
   final DatabaseServices _databaseService = DatabaseServices();
-  Future<FerryTicket> _getFerryTicket() async {
-    return await _databaseService.ferryTicket();
+  Future<List<FerryTicket>> _getFerryTicket() async {
+    return await _databaseService.getFerryTickets();
   }
 
-  Future<void> _getUsers() async {
-    return await _databaseService.registerUser();
-  }
+  // Future<void> _getUsers() async {
+  //   return await _databaseService.registerUser();
+  // }
 
   Future<void> _onFerryTicketDelete(FerryTicket FerryTicket) async {
     await _databaseService.deleteFerryTicket(FerryTicket);
@@ -63,7 +63,8 @@ class _ViewTicketPageState extends State<ViewTicketPage> {
                   Navigator.of(context)
                       .push(
                         MaterialPageRoute(
-                          builder: (_) => FerryTicketFormPage(ferry_ticket: value),
+                          builder: (_) =>
+                              FerryTicketFormPage(ferry_ticket: value),
                           fullscreenDialog: true,
                         ),
                       )
@@ -72,22 +73,22 @@ class _ViewTicketPageState extends State<ViewTicketPage> {
               },
               onDelete: _onFerryTicketDelete,
             ),
-          //  BrandBuilder(
-          //     future: _getBrands(),
-          //     onEdit: (value) {
-          //       {
-          //         Navigator.of(context)
-          //             .push(
-          //               MaterialPageRoute(
-          //                 builder: (_) => BrandFormPage(brand: value),
-          //                 fullscreenDialog: true,
-          //               ),
-          //             )
-          //             .then((_) => setState(() {}));
-          //       }
-          //     },
-          //     onDelete: _onBrandDelete,
-          //   ),
+            //  BrandBuilder(
+            //     future: _getBrands(),
+            //     onEdit: (value) {
+            //       {
+            //         Navigator.of(context)
+            //             .push(
+            //               MaterialPageRoute(
+            //                 builder: (_) => BrandFormPage(brand: value),
+            //                 fullscreenDialog: true,
+            //               ),
+            //             )
+            //             .then((_) => setState(() {}));
+            //       }
+            //     },
+            //     onDelete: _onBrandDelete,
+            //   ),
           ],
         ),
         floatingActionButton: Column(

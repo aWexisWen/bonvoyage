@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bonvoyage/pages/view_ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:bonvoyage/models/ferry_ticket.dart';
 import 'package:bonvoyage/models/users.dart';
@@ -63,7 +64,8 @@ class DatabaseServices {
     // Query the table for all the Brands.
     final List<Map<String, dynamic>> maps = await db.query('ferryticket');
     // Convert the List<Map<String, dynamic> into a List<Brand>.
-    return List.generate(maps.length, (index) => FerryTicket.fromMap(maps[index]));
+    return List.generate(
+        maps.length, (index) => FerryTicket.fromMap(maps[index]));
   }
 
   Future<void> editFerryTicket(FerryTicket ferryTicket) async {
@@ -118,8 +120,7 @@ class DatabaseServices {
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => FerryTicketFormPage(user: user)),
+        MaterialPageRoute(builder: (context) => ViewTicketPage()),
       );
     }
   }

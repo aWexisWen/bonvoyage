@@ -125,7 +125,7 @@ class _SignupformState extends State<Signupform> {
                       margin: EdgeInsets.all(30.0),
                       width: double.infinity,
                       child: ButtonGradient(
-                          label: 'Sign Up',
+                          label: 'Sign Uppp',
                           textStyle: const TextStyle(
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w600,
