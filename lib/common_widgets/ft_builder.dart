@@ -32,8 +32,8 @@ class FerryTicketBuilder extends StatelessWidget {
           child: ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              final FerryTicket = snapshot.data![index];
-              return _buildFerryTicketCard(FerryTicket, context);
+              final ferry_ticket = snapshot.data![index];
+              return _buildFerryTicketCard(ferry_ticket, context);
             },
           ),
         );
@@ -56,7 +56,7 @@ class FerryTicketBuilder extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
-                FerryTicket.depart_route.toString(),
+                FerryTicket.book_id.toString(),
                 style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,

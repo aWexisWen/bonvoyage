@@ -57,6 +57,15 @@ class DatabaseServices {
     );
   }
 
+  Future<List<FerryTicket>> getFerryTickets() async {
+    // Get a reference to the database.
+    final db = await _databaseService.database;
+    // Query the table for all the Brands.
+    final List<Map<String, dynamic>> maps = await db.query('ferryticket');
+    // Convert the List<Map<String, dynamic> into a List<Brand>.
+    return List.generate(maps.length, (index) => FerryTicket.fromMap(maps[index]));
+  }
+
   Future<void> editFerryTicket(FerryTicket ferryTicket) async {
     final db = await _databaseService.database;
     await db.update(

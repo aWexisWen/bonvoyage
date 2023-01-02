@@ -64,13 +64,15 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
     final dest_route = _depart_dateController.text;
 
     widget.ferry_ticket == null
-        ? await _databaseService.insertFerryTicket(FerryTicket(
-            depart_date: depart_date,
+        ? await _databaseService.insertFerryTicket
+        (FerryTicket
+        (   depart_date: depart_date,
             journey: journey,
             depart_route: depart_route,
             dest_route: dest_route))
-        : await _databaseService.editFerryTicket(FerryTicket(
-            depart_date: depart_date,
+        : await _databaseService.editFerryTicket
+        (FerryTicket
+        (    depart_date: depart_date,
             journey: journey,
             depart_route: depart_route,
             dest_route: dest_route));
@@ -98,8 +100,8 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                     hintText: 'Depart route',
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                            width: 3, color: Colors.pink)),
+                        borderSide:
+                            const BorderSide(width: 3, color: Colors.pink)),
                   ),
                   value: selectedDepart,
                   items: depart
@@ -122,8 +124,8 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                     hintText: 'Destination route',
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(
-                            width: 3, color: Colors.pink)),
+                        borderSide:
+                            const BorderSide(width: 3, color: Colors.pink)),
                   ),
                   value: selectedDestination,
                   items: destination
@@ -180,7 +182,6 @@ class _FerryTicketFormPageState extends State<FerryTicketFormPage> {
                     onSaved: (val) => print(val),
                   ),
                 ),
-                const SizedBox(height: 16.0),
                 const SizedBox(height: 16.0),
                 SizedBox(
                   height: 45.0,
